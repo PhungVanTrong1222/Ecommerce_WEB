@@ -1,0 +1,272 @@
+/**
+ * TechShop - Admin Dashboard Stylesheet (V1)
+ * Dedicated for layouts/admin.blade.php & 7 Admin Pages
+ */
+
+:root {
+    --admin-sidebar-width: 260px;
+    --admin-sidebar-bg: #0f172a;
+    --admin-content-bg: #f1f5f9;
+    --admin-primary: #2563eb;
+    --admin-primary-hover: #1d4ed8;
+    --admin-border: #e2e8f0;
+}
+
+body {
+    background-color: var(--admin-content-bg);
+    margin: 0;
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================
+   1. ADMIN LAYOUT & SIDEBAR
+   ========================================================= */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: var(--admin-sidebar-width);
+    background-color: var(--admin-sidebar-bg);
+    color: #cbd5e1;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    overflow-y: auto;
+}
+
+.admin-brand {
+    padding: 22px 24px;
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    letter-spacing: -0.3px;
+}
+
+.admin-brand i {
+    color: #f59e0b;
+    font-size: 22px;
+}
+
+.admin-sidebar nav {
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.admin-sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    margin: 2px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.admin-sidebar nav a i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.admin-sidebar nav a:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.admin-sidebar nav a.active {
+    color: #ffffff !important;
+    background-color: var(--admin-primary) !important;
+    font-weight: 600;
+}
+
+.admin-content {
+    flex: 1;
+    margin-left: var(--admin-sidebar-width);
+    padding: 24px 32px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   2. ADMIN TOPBAR & HEADERS
+   ========================================================= */
+.admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--admin-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    margin-bottom: 24px;
+}
+
+.admin-topbar h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.admin-user-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--admin-primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.admin-role-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: #0f172a;
+    color: #ffffff;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* =========================================================
+   3. STAT CARDS & DASHBOARD WIDGETS
+   ========================================================= */
+.stat-card {
+    background: #ffffff;
+    border: 1px solid var(--admin-border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.bg-success-light { background-color: #dcfce7 !important; color: #16a34a !important; }
+.bg-primary-light { background-color: #dbeafe !important; color: #2563eb !important; }
+.bg-info-light    { background-color: #e0f2fe !important; color: #0284c7 !important; }
+.bg-warning-light { background-color: #fef3c7 !important; color: #d97706 !important; }
+
+/* =========================================================
+   4. DATA TABLES (ADMIN TABLES)
+   ========================================================= */
+.card {
+    border-radius: 14px;
+    border: 1px solid var(--admin-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.table thead th,
+.table thead.thead-light th {
+    background-color: #f8fafc !important;
+    color: #475569 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--admin-border) !important;
+}
+
+.table tbody td {
+    padding: 14px 16px !important;
+    font-size: 13.5px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    color: #334155;
+    vertical-align: middle !important;
+}
+
+.table tbody tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* =========================================================
+   5. BOOTSTRAP 4/5 COMPATIBILITY UTILITIES
+   ========================================================= */
+.mr-1 { margin-right: 0.25rem !important; }
+.mr-2 { margin-right: 0.5rem !important; }
+.ml-1 { margin-left: 0.25rem !important; }
+.ml-2 { margin-left: 0.5rem !important; }
+.text-right { text-align: right !important; }
+.font-weight-bold { font-weight: 700 !important; }
+.font-weight-600 { font-weight: 600 !important; }
+.font-size-13 { font-size: 13px !important; }
+.font-size-15 { font-size: 15px !important; }
+
+.badge-success   { background-color: #10b981 !important; color: #ffffff !important; }
+.badge-warning   { background-color: #f59e0b !important; color: #ffffff !important; }
+.badge-danger    { background-color: #e11d48 !important; color: #ffffff !important; }
+.badge-info      { background-color: #0284c7 !important; color: #ffffff !important; }
+.badge-primary   { background-color: #2563eb !important; color: #ffffff !important; }
+.badge-secondary { background-color: #64748b !important; color: #ffffff !important; }
+.badge-light     { background-color: #f1f5f9 !important; color: #334155 !important; }
+
+.btn-block {
+    display: block !important;
+    width: 100% !important;
+}
+
+.close {
+    background: transparent !important;
+    border: none !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    opacity: 0.5 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+}
+.close:hover {
+    opacity: 1 !important;
+}

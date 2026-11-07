@@ -1,0 +1,640 @@
+/**
+ * TechShop - Customer Pages Stylesheet
+ * Áp dụng cho: Cart, Checkout, Order Return, Order Detail, Login, Register, Account
+ * Bảng màu: Navy (#0f172a), Royal Blue (#2563eb), Crimson Red (#e11d48), Border (#e2e8f0)
+ */
+
+/* ===== 1. WRAPPER & BREADCRUMB ===== */
+.customer-page-wrapper {
+    width: 100%;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 24px;
+    padding: 0;
+    background: transparent;
+}
+
+.breadcrumb a {
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.breadcrumb a:hover {
+    color: #2563eb;
+}
+
+.breadcrumb span {
+    color: #94a3b8;
+    user-select: none;
+}
+
+.breadcrumb strong {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* ===== 2. CARDS & GENERAL SURFACES ===== */
+.ts-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.ts-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+.ts-card-header {
+    background: #ffffff;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 16px 24px;
+}
+
+.ts-card-body {
+    padding: 24px;
+}
+
+/* ===== 3. TRANG GIỎ HÀNG (CART) ===== */
+.cart-table th {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    font-weight: 600;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 14px 16px;
+}
+
+.cart-table td {
+    padding: 18px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.cart-item-img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+.cart-item-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.cart-item-title:hover {
+    color: #2563eb;
+}
+
+.cart-item-meta {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* Bộ điều khiển số lượng */
+.qty-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    overflow: hidden;
+    height: 34px;
+}
+
+.qty-control button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: #334155;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-control button:hover:not(:disabled) {
+    background: #f1f5f9;
+    color: #2563eb;
+}
+
+.qty-control button:disabled {
+    color: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.qty-control input {
+    width: 44px;
+    height: 32px;
+    border: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: #0f172a;
+    outline: none;
+    background: transparent;
+}
+
+/* Nút xóa item */
+.btn-remove-cart-item {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-cart-item:hover {
+    background: #fee2e2;
+    color: #e11d48;
+    border-color: #fecdd3;
+}
+
+/* Hàng không khả dụng */
+.unavailable-row {
+    background-color: #fffbeb !important;
+    position: relative;
+}
+
+.unavailable-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #f59e0b;
+}
+
+/* Summary Card */
+.order-summary-card {
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.btn-checkout-primary {
+    background: #2563eb;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.btn-checkout-primary:hover:not(:disabled) {
+    background: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+
+.btn-checkout-primary:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== 4. TRANG THANH TOÁN (CHECKOUT) ===== */
+.form-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.ts-form-control {
+    height: 46px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #0f172a;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ts-form-control:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    outline: none;
+}
+
+textarea.ts-form-control {
+    height: auto;
+}
+
+/* Radio Card Phương thức thanh toán */
+.payment-method-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    background: #ffffff;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.payment-method-card:hover {
+    border-color: #93c5fd;
+    background: #f8fafc;
+}
+
+.payment-method-card.selected,
+.payment-method-card:has(input[type="radio"]:checked) {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.payment-method-card input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #2563eb;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.payment-method-info {
+    flex: 1;
+}
+
+.payment-method-title {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 15px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.payment-method-desc {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+.btn-place-order {
+    background: #e11d48;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-weight: 700;
+    font-size: 17px;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-place-order:hover:not(:disabled) {
+    background: #be123c;
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+
+/* ===== 5. TRANG CHI TIẾT ĐƠN HÀNG (ORDER DETAIL) & STEPPER ===== */
+.order-stepper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 20px 0 10px 0;
+}
+
+.order-stepper::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 30px;
+    right: 30px;
+    height: 4px;
+    background: #e2e8f0;
+    z-index: 1;
+}
+
+.stepper-progress {
+    position: absolute;
+    top: 22px;
+    left: 30px;
+    height: 4px;
+    background: #2563eb;
+    z-index: 2;
+    transition: width 0.4s ease;
+}
+
+.step-item {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90px;
+    text-align: center;
+}
+
+.step-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #cbd5e1;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.step-item.completed .step-circle {
+    background: #10b981;
+    border-color: #10b981;
+    color: #ffffff;
+}
+
+.step-item.active .step-circle {
+    background: #2563eb;
+    border-color: #93c5fd;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+.step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    margin-top: 10px;
+    line-height: 1.3;
+}
+
+.step-item.completed .step-label,
+.step-item.active .step-label {
+    color: #0f172a;
+}
+
+/* Badge Trạng thái */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-badge.pending { background: #fef3c7; color: #b45309; }
+.status-badge.confirmed { background: #e0f2fe; color: #0369a1; }
+.status-badge.processing { background: #ede9fe; color: #6d28d9; }
+.status-badge.shipped { background: #dbeafe; color: #1d4ed8; }
+.status-badge.delivered { background: #dcfce7; color: #15803d; }
+.status-badge.cancelled { background: #fee2e2; color: #b91c1c; }
+
+/* ===== 6. TRANG KẾT QUẢ VNPAY (ORDER RETURN) ===== */
+.return-card {
+    max-width: 620px;
+    margin: 0 auto;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.return-header-success {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.return-header-danger {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+}
+
+.return-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px auto;
+    font-size: 40px;
+    color: #ffffff;
+    backdrop-filter: blur(4px);
+}
+
+/* ===== 7. TRANG AUTH (LOGIN & REGISTER) ===== */
+.auth-container {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.auth-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+    padding: 36px 32px;
+}
+
+.auth-logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    display: inline-block;
+    margin-bottom: 6px;
+    text-decoration: none;
+}
+
+.auth-logo span {
+    color: #2563eb;
+    font-weight: 400;
+}
+
+.btn-auth-submit {
+    background: #2563eb;
+    border: none;
+    border-radius: 12px;
+    height: 48px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.btn-auth-submit:hover:not(:disabled) {
+    background: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+
+/* Hộp tài khoản demo */
+.demo-accounts-box {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 24px;
+}
+
+.demo-account-pill {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.demo-account-pill:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* ===== 8. TRANG TÀI KHOẢN (ACCOUNT) ===== */
+.account-sidebar {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.account-avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 auto 12px auto;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.account-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    color: #475569;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+}
+
+.account-nav-item:hover {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.account-nav-item.active {
+    background: #eff6ff;
+    color: #2563eb;
+    border-left-color: #2563eb;
+}
+
+.account-nav-item i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Order Filter Tabs */
+.order-filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.order-filter-pill {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.order-filter-pill:hover {
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+.order-filter-pill.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+    .order-stepper {
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    .auth-card {
+        padding: 24px 20px;
+    }
+}

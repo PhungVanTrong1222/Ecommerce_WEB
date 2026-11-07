@@ -1,0 +1,50 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerce_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "${APP_PORT:-8080}:8000"
+    environment:
+      - DB_CONNECTION=sqlsrv
+      - DB_HOST=sqlserver
+      - DB_PORT=1433
+      - DB_DATABASE=ecommerce
+      - DB_USERNAME=sa
+      - DB_PASSWORD=Ecommerce@2026!
+      - DB_ENCRYPT=no
+      - DB_TRUST_SERVER_CERTIFICATE=true
+      - APP_TIMEZONE=UTC
+      - PHP_CLI_SERVER_WORKERS=8
+    depends_on:
+      - sqlserver
+    networks:
+      - ecommerce_network
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: ecommerce_sqlserver
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Ecommerce@2026!
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - ecommerce_network
+
+volumes:
+  sqlserver_data:
+    driver: local
+
+networks:
+  ecommerce_network:
+    driver: bridge
