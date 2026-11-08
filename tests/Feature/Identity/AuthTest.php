@@ -7,6 +7,76 @@ use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+
+        $curlScript = __DIR__ . '/../../test_sanctum_curl.sh';
+        if (file_exists($curlScript)) {
+            @unlink($curlScript);
+        }
+
+        static::cleanupAllTestData();
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->cleanupTestData();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->cleanupTestData();
+        parent::tearDown();
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        static::cleanupAllTestData();
+        parent::tearDownAfterClass();
+    }
+
+    /**
+     * Dọn dẹp dữ liệu test của instance
+     */
+    protected function cleanupTestData(): void
+    {
+        static::cleanupAllTestData();
+    }
+
+    /**
+     * Dọn dẹp sạch sẽ các user và dữ liệu rác sinh ra trong test
+     */
+    public static function cleanupAllTestData(): void
+    {
+        $testUsers = DB::table('users')
+            ->where('email', 'LIKE', 'phpunit_tester_%')
+            ->orWhere('email', 'LIKE', 'tester_%@example.com')
+            ->orWhere('email', 'LIKE', 'attack_%@example.com')
+            ->pluck('id');
+
+        if ($testUsers->isNotEmpty()) {
+            $userCartIds = DB::table('carts')->whereIn('user_id', $testUsers)->pluck('id');
+            if ($userCartIds->isNotEmpty()) {
+                DB::table('cart_items')->whereIn('cart_id', $userCartIds)->delete();
+                DB::table('carts')->whereIn('id', $userCartIds)->delete();
+            }
+
+            $userOrderIds = DB::table('orders')->whereIn('user_id', $testUsers)->pluck('id');
+            if ($userOrderIds->isNotEmpty()) {
+                $paymentIds = DB::table('payments')->whereIn('order_id', $userOrderIds)->pluck('id');
+                if ($paymentIds->isNotEmpty()) {
+                    DB::table('payment_attempts')->whereIn('payment_id', $paymentIds)->delete();
+                    DB::table('payments')->whereIn('id', $paymentIds)->delete();
+                }
+                DB::table('order_items')->whereIn('order_id', $userOrderIds)->delete();
+                DB::table('orders')->whereIn('id', $userOrderIds)->delete();
+            }
+
+            DB::table('users')->whereIn('id', $testUsers)->delete();
+        }
+    }
     /**
      * Test lấy CSRF cookie từ Sanctum.
      */

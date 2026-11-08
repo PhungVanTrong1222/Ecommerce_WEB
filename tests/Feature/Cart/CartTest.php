@@ -12,6 +12,18 @@ class CartTest extends TestCase
 {
     protected ?User $customer = null;
 
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+
+        $curlScript = __DIR__ . '/../../test_sanctum_curl.sh';
+        if (file_exists($curlScript)) {
+            @unlink($curlScript);
+        }
+
+        static::cleanupAllTestData();
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -43,13 +55,115 @@ class CartTest extends TestCase
             $this->customer = User::find($userId);
         }
 
-        if ($this->customer) {
-            $userCartIds = DB::table('carts')->where('user_id', $this->customer->id)->pluck('id');
+        $this->cleanupTestData();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->cleanupTestData();
+        parent::tearDown();
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        static::cleanupAllTestData();
+        parent::tearDownAfterClass();
+    }
+
+    /**
+     * Dọn dẹp dữ liệu test của instance
+     */
+    protected function cleanupTestData(): void
+    {
+        static::cleanupAllTestData($this->customer?->id);
+    }
+
+    /**
+     * Dọn dẹp triệt để dữ liệu rác phát sinh trong quá trình test
+     */
+    public static function cleanupAllTestData(?int $customerId = null): void
+    {
+        if (!$customerId) {
+            $customerId = DB::table('users')->where('email', 'customer@example.com')->value('id');
+        }
+
+        // 1. Tìm tất cả ID sản phẩm test (cả slug product-test-% và test-phone-%)
+        $testProductIds = DB::table('products')
+            ->where('slug', 'LIKE', 'product-test-%')
+            ->orWhere('slug', 'LIKE', 'test-phone-%')
+            ->pluck('id');
+
+        // Bổ sung các sản phẩm thuộc danh mục 'phu-kien-test' nếu có
+        $testCatId = DB::table('categories')->where('slug', 'phu-kien-test')->value('id');
+        if ($testCatId) {
+            $catProductIds = DB::table('products')
+                ->where('category_id', $testCatId)
+                ->pluck('id');
+            $testProductIds = $testProductIds->merge($catProductIds)->unique()->filter();
+        }
+
+        // 2. Tìm tất cả variant liên quan đến các sản phẩm test
+        $variantIds = collect();
+        if ($testProductIds->isNotEmpty()) {
+            $variantIds = DB::table('product_variants')
+                ->whereIn('product_id', $testProductIds)
+                ->pluck('id');
+        }
+
+        // 3. Xóa các mục trong giỏ hàng (cart_items) liên quan đến variant test
+        if ($variantIds->isNotEmpty()) {
+            DB::table('cart_items')->whereIn('variant_id', $variantIds)->delete();
+
+            // Xóa order_items & orders nếu có liên quan
+            $orderIds = DB::table('order_items')->whereIn('variant_id', $variantIds)->pluck('order_id');
+            if ($orderIds->isNotEmpty()) {
+                $paymentIds = DB::table('payments')->whereIn('order_id', $orderIds)->pluck('id');
+                if ($paymentIds->isNotEmpty()) {
+                    DB::table('payment_attempts')->whereIn('payment_id', $paymentIds)->delete();
+                    DB::table('payments')->whereIn('id', $paymentIds)->delete();
+                }
+                DB::table('order_items')->whereIn('order_id', $orderIds)->delete();
+                DB::table('orders')->whereIn('id', $orderIds)->delete();
+            }
+
+            // Xóa tồn kho (inventory)
+            DB::table('inventory')->whereIn('variant_id', $variantIds)->delete();
+
+            // Xóa variant
+            DB::table('product_variants')->whereIn('id', $variantIds)->delete();
+        }
+
+        // 4. Xóa product_images nếu có
+        if ($testProductIds->isNotEmpty()) {
+            DB::table('product_images')->whereIn('product_id', $testProductIds)->delete();
+
+            // Xóa products test
+            DB::table('products')->whereIn('id', $testProductIds)->delete();
+        }
+
+        DB::table('products')->where('slug', 'LIKE', 'product-test-%')->delete();
+
+        // Xóa danh mục test 'phu-kien-test'
+        DB::table('categories')->where('slug', 'phu-kien-test')->delete();
+
+        // 5. Xóa giỏ hàng của user customer test
+        if ($customerId) {
+            $userCartIds = DB::table('carts')->where('user_id', $customerId)->pluck('id');
             if ($userCartIds->isNotEmpty()) {
                 DB::table('cart_items')->whereIn('cart_id', $userCartIds)->delete();
                 DB::table('carts')->whereIn('id', $userCartIds)->delete();
             }
         }
+
+        // 6. Xóa các guest cart rỗng còn sót lại
+        DB::table('carts')
+            ->whereNull('user_id')
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('cart_items')
+                    ->whereColumn('cart_items.cart_id', 'carts.id');
+            })
+            ->delete();
     }
 
     /**
