@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
     <!-- Admin Dedicated Stylesheet -->
-    <link rel="stylesheet" href="/assets/css/admin.css?v=2.0">
+    <link rel="stylesheet" href="/assets/css/admin.css?v=2.1">
 
     @stack('styles')
 </head>

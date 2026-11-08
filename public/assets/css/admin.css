@@ -6,10 +6,10 @@
 :root {
     --admin-sidebar-width: 260px;
     --admin-sidebar-bg: #0f172a;
-    --admin-content-bg: #e2e8f0;
+    --admin-content-bg: #f1f5f9;
     --admin-primary: #2563eb;
     --admin-primary-hover: #1d4ed8;
-    --admin-border: #cbd5e1;
+    --admin-border: #e2e8f0;
 }
 
 body {
@@ -116,9 +116,8 @@ body {
     background: #ffffff;
     padding: 16px 24px;
     border-radius: 12px;
-    border: 1.5px solid #cbd5e1;
-    border-left: 5px solid #2563eb;
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
     margin-bottom: 24px;
 }
 
@@ -163,26 +162,21 @@ body {
    ========================================================= */
 .stat-card {
     background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-bottom: 4px solid #2563eb;
+    border: 1px solid #e2e8f0;
     border-radius: 16px;
     padding: 20px;
-    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
     display: flex;
     align-items: center;
     gap: 16px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+    transform: translateY(-2px);
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
 }
-
-.stat-card:has(.bg-success-light) { border-bottom-color: #16a34a; }
-.stat-card:has(.bg-primary-light) { border-bottom-color: #2563eb; }
-.stat-card:has(.bg-info-light)    { border-bottom-color: #0284c7; }
-.stat-card:has(.bg-warning-light) { border-bottom-color: #d97706; }
 
 .stat-icon {
     width: 56px;
@@ -205,9 +199,8 @@ body {
    ========================================================= */
 .card {
     border-radius: 14px;
-    border: 1.5px solid #cbd5e1;
-    border-bottom: 4px solid #94a3b8;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
     overflow: hidden;
 }
 
