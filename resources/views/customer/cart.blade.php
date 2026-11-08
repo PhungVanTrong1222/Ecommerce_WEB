@@ -3,7 +3,7 @@
 @section('title', 'Giỏ hàng của bạn - TechShop')
 
 @push('styles')
-<link rel="stylesheet" href="/assets/css/customer-pages.css?v=2.1">
+<link rel="stylesheet" href="/assets/css/customer-pages.css?v=2.2">
 @endpush
 
 @section('content')

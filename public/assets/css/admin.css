@@ -6,10 +6,10 @@
 :root {
     --admin-sidebar-width: 260px;
     --admin-sidebar-bg: #0f172a;
-    --admin-content-bg: #f1f5f9;
+    --admin-content-bg: #dde5ef;
     --admin-primary: #2563eb;
     --admin-primary-hover: #1d4ed8;
-    --admin-border: #e2e8f0;
+    --admin-border: #c5d1e0;
 }
 
 body {
@@ -116,8 +116,8 @@ body {
     background: #ffffff;
     padding: 16px 24px;
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    border: 1.5px solid #c5d1e0;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
     margin-bottom: 24px;
 }
 
@@ -162,10 +162,10 @@ body {
    ========================================================= */
 .stat-card {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
+    border: 1.5px solid #c5d1e0;
     border-radius: 16px;
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
     display: flex;
     align-items: center;
     gap: 16px;
@@ -174,8 +174,8 @@ body {
 
 .stat-card:hover {
     transform: translateY(-2px);
-    border-color: #cbd5e1;
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+    border-color: #94a3b8;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
 }
 
 .stat-icon {
@@ -198,9 +198,10 @@ body {
    4. DATA TABLES (ADMIN TABLES)
    ========================================================= */
 .card {
+    background: #ffffff;
     border-radius: 14px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    border: 1.5px solid #c5d1e0;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
     overflow: hidden;
 }
 
@@ -224,7 +225,7 @@ body {
 .table tbody td {
     padding: 14px 16px !important;
     font-size: 13.5px !important;
-    border-bottom: 1px solid #f1f5f9 !important;
+    border-bottom: 1px solid #cbd5e1 !important;
     color: #334155;
     vertical-align: middle !important;
 }
