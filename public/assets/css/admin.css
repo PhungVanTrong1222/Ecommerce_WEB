@@ -6,10 +6,10 @@
 :root {
     --admin-sidebar-width: 260px;
     --admin-sidebar-bg: #0f172a;
-    --admin-content-bg: #f1f5f9;
+    --admin-content-bg: #e2e8f0;
     --admin-primary: #2563eb;
     --admin-primary-hover: #1d4ed8;
-    --admin-border: #e2e8f0;
+    --admin-border: #cbd5e1;
 }
 
 body {
@@ -116,8 +116,9 @@ body {
     background: #ffffff;
     padding: 16px 24px;
     border-radius: 12px;
-    border: 1px solid var(--admin-border);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    border: 1.5px solid #cbd5e1;
+    border-left: 5px solid #2563eb;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
     margin-bottom: 24px;
 }
 
@@ -162,10 +163,11 @@ body {
    ========================================================= */
 .stat-card {
     background: #ffffff;
-    border: 1px solid var(--admin-border);
+    border: 1.5px solid #cbd5e1;
+    border-bottom: 4px solid #2563eb;
     border-radius: 16px;
     padding: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
     display: flex;
     align-items: center;
     gap: 16px;
@@ -173,9 +175,14 @@ body {
 }
 
 .stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
 }
+
+.stat-card:has(.bg-success-light) { border-bottom-color: #16a34a; }
+.stat-card:has(.bg-primary-light) { border-bottom-color: #2563eb; }
+.stat-card:has(.bg-info-light)    { border-bottom-color: #0284c7; }
+.stat-card:has(.bg-warning-light) { border-bottom-color: #d97706; }
 
 .stat-icon {
     width: 56px;
@@ -198,8 +205,9 @@ body {
    ========================================================= */
 .card {
     border-radius: 14px;
-    border: 1px solid var(--admin-border);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    border: 1.5px solid #cbd5e1;
+    border-bottom: 4px solid #94a3b8;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
     overflow: hidden;
 }
 
@@ -210,14 +218,14 @@ body {
 
 .table thead th,
 .table thead.thead-light th {
-    background-color: #f8fafc !important;
-    color: #475569 !important;
+    background-color: #1e293b !important;
+    color: #ffffff !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
     padding: 12px 16px !important;
-    border-bottom: 1px solid var(--admin-border) !important;
+    border-bottom: none !important;
 }
 
 .table tbody td {
@@ -269,4 +277,82 @@ body {
 }
 .close:hover {
     opacity: 1 !important;
+}
+
+/* =========================================================
+   6. ADMIN TOAST NOTIFICATIONS (TS-TOAST)
+   ========================================================= */
+.ts-toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.ts-toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 310px;
+    max-width: 420px;
+    padding: 14px 18px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+    border: 1.5px solid #cbd5e1;
+    border-left: 5px solid #2563eb;
+    animation: tsSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ts-toast-success { border-left-color: #10b981; }
+.ts-toast-error   { border-left-color: #e11d48; }
+.ts-toast-warning { border-left-color: #f59e0b; }
+.ts-toast-info    { border-left-color: #0284c7; }
+
+.ts-toast-icon {
+    font-size: 20px;
+}
+.ts-toast-success .ts-toast-icon { color: #10b981; }
+.ts-toast-error .ts-toast-icon   { color: #e11d48; }
+.ts-toast-warning .ts-toast-icon { color: #f59e0b; }
+.ts-toast-info .ts-toast-icon    { color: #0284c7; }
+
+.ts-toast-body {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #0f172a;
+}
+
+.ts-toast-close {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    line-height: 1;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 0;
+}
+
+.ts-toast-close:hover {
+    color: #0f172a;
+}
+
+.ts-toast-hide {
+    animation: tsSlideOut 0.25s forwards ease-in;
+}
+
+@keyframes tsSlideIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes tsSlideOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(40px); }
 }
