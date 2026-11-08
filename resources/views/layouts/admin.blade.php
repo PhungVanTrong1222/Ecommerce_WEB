@@ -114,8 +114,9 @@
     document.addEventListener('DOMContentLoaded', async function() {
         try {
             // Kiểm tra quyền Admin, redirect về /login nếu không đủ quyền
-            const user = await window.AppAuth.requireAdmin();
-            if (user) {
+            const isOk = await window.AppAuth.requireAdmin();
+            const user = window.AppAuth.getUser();
+            if (isOk && user) {
                 const nameEl = document.getElementById('adminUserName');
                 const roleEl = document.getElementById('adminUserRole');
                 const avatarEl = document.getElementById('adminAvatarInitial');

@@ -71,7 +71,7 @@ Route::get('/account', function () {
 // 2. QUẢN TRỊ VIÊN (ADMIN ROUTES)
 // ==========================================
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('admin.web')->group(function () {
     // Tổng quan Dashboard
     Route::get('/', function () {
         return view('admin.dashboard');

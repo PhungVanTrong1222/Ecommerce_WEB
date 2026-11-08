@@ -48,30 +48,6 @@
                 <span class="text-muted small">Chưa có tài khoản?</span>
                 <a href="/register" class="fw-bold text-primary text-decoration-none ms-1 small">Đăng ký ngay</a>
             </div>
-
-            <!-- Gợi ý tài khoản demo -->
-            <div class="demo-accounts-box">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted fw-bold" style="font-size: 11px; letter-spacing: 0.5px;">TÀI KHOẢN MẪU DÙNG THỬ</span>
-                    <span class="badge bg-primary-subtle text-primary" style="font-size: 10px;">Click 1 chạm để điền</span>
-                </div>
-                <div class="d-grid gap-2">
-                    <div class="demo-account-pill btn-fill-demo" data-email="customer@example.com" data-pwd="customer123">
-                        <div>
-                            <div class="fw-bold text-dark small">Khách hàng: customer@example.com</div>
-                            <div class="text-muted" style="font-size: 11px;">Mật khẩu: customer123</div>
-                        </div>
-                        <span class="badge bg-light text-primary border">Chọn</span>
-                    </div>
-                    <div class="demo-account-pill btn-fill-demo" data-email="admin@techshop.vn" data-pwd="admin123">
-                        <div>
-                            <div class="fw-bold text-dark small">Admin: admin@techshop.vn</div>
-                            <div class="text-muted" style="font-size: 11px;">Mật khẩu: admin123</div>
-                        </div>
-                        <span class="badge bg-light text-dark border">Chọn</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

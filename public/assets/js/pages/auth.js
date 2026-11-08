@@ -75,19 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Điền tài khoản demo
-    document.querySelectorAll('.btn-fill-demo').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const emailInput = document.getElementById('login-email');
-            const pwdInput = document.getElementById('login-password');
-            if (emailInput && pwdInput) {
-                emailInput.value = this.getAttribute('data-email');
-                pwdInput.value = this.getAttribute('data-pwd');
-                showToast('Đã điền tài khoản mẫu. Nhấn Đăng nhập để tiếp tục.', 'info');
-            }
-        });
-    });
-
     // 1. Xử lý Form Đăng nhập
     const loginForm = document.getElementById('login-form');
     if (loginForm) {

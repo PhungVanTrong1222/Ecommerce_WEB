@@ -3,6 +3,7 @@
 use App\Shared\Exceptions\BusinessException;
 use App\Shared\Helpers\ApiResponse;
 use App\Shared\Middleware\CheckPermission;
+use App\Shared\Middleware\EnsureAdminWeb;
 use App\Shared\Middleware\EnsureUserActive;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -37,6 +38,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => CheckPermission::class,
             'active' => EnsureUserActive::class,
             'EnsureUserActive' => EnsureUserActive::class,
+            'admin.web' => EnsureAdminWeb::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
